@@ -1,0 +1,63 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # Placeholder build step. The Coding Agent will replace this
+      # with real build commands once it picks a framework
+      # (Astro, Next static export, plain HTML, etc.).
+      - name: Build
+        run: |
+          mkdir -p dist
+          if [ -f index.html ]; then
+            cp -r ./* dist/ 2>/dev/null || true
+          else
+            cat > dist/index.html <<'EOF'
+          <!doctype html>
+          <html lang="en">
+            <head>
+              <meta charset="utf-8" />
+              <title>first-booster-site</title>
+            </head>
+            <body>
+              <h1>first-booster-site</h1>
+              <p>Deploy pipeline is live. Booster agents will take it from here.</p>
+            </body>
+          </html>
+          EOF
+          fi
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
