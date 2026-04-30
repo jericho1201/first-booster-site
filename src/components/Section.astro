@@ -1,0 +1,44 @@
+---
+interface Props {
+  id?: string;
+  background?: 'default' | 'surface' | 'muted';
+  paddingY?: 'sm' | 'md' | 'lg';
+  as?: string;
+}
+
+const {
+  id,
+  background = 'default',
+  paddingY = 'md',
+  as: Tag = 'section',
+} = Astro.props;
+
+const bgMap = {
+  default: 'var(--token-color-bg)',
+  surface: 'var(--token-color-surface)',
+  muted:   'var(--token-color-muted-bg)',
+};
+
+const pyMap = {
+  sm: 'var(--token-space-6)',
+  md: 'var(--token-space-12)',
+  lg: 'var(--token-space-20)',
+};
+---
+
+<Tag
+  id={id}
+  style={`background: ${bgMap[background]}; padding-top: ${pyMap[paddingY]}; padding-bottom: ${pyMap[paddingY]};`}
+>
+  <div class="section-inner">
+    <slot />
+  </div>
+</Tag>
+
+<style>
+  .section-inner {
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 0 var(--token-space-4);
+  }
+</style>

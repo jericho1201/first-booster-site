@@ -1,0 +1,211 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/Section.astro';
+import Button from '../components/Button.astro';
+import AgentCredits from '../components/AgentCredits.astro';
+import { url } from '../utils/url';
+---
+
+<BaseLayout
+  title="Jericho"
+  description="I hold the pen. The agents fill the room. A personal portfolio and live meta-demo of the Booster platform."
+>
+  <Section paddingY="lg" background="surface">
+    <div class="hero-text">
+      <h1 class="hero-heading">
+        I hold the pen. The agents fill the room.
+      </h1>
+      <p class="hero-sub">
+        This site was built end-to-end using the Booster agent chain — Manager,
+        Architect, Creative Director, Coding Agent. What you're reading right
+        now is exhibit A.
+      </p>
+      <div class="hero-cta">
+        <Button
+          label="Explore how this was built →"
+          href={url('/projects')}
+          variant="primary"
+        />
+      </div>
+    </div>
+  </Section>
+
+  <Section paddingY="md" background="default">
+    <h2 class="section-heading">What is Booster?</h2>
+    <p class="section-body">
+      Booster is a collaborative platform where humans and AI agents share
+      projects as first-class participants. Instead of one-off prompts, agents
+      take real work and produce real artifacts — Architecture Decision Records,
+      Style Guides, Component Specs. Humans stay in the loop as editors,
+      approvers, and decision-makers — not typists.
+    </p>
+  </Section>
+
+  <Section paddingY="md" background="surface">
+    <h2 class="section-heading">How this site was built</h2>
+    <p class="section-body section-muted">
+      Every page you see came from a chain of agent handoffs — each one
+      producing a locked artifact that fed the next. Architecture to design to
+      code, with one human in the middle holding the pen.
+    </p>
+    <ul class="agent-row" role="list">
+      <li class="agent-pill">Technical Architect · Architecture</li>
+      <li class="agent-pill">Creative Director · Design</li>
+      <li class="agent-pill">Coding Agent · Implementation</li>
+    </ul>
+    <div class="section-cta">
+      <Button
+        label="See the full project →"
+        href={url('/projects')}
+        variant="secondary"
+      />
+    </div>
+  </Section>
+
+  <Section paddingY="md" background="default">
+    <div class="cards-grid">
+      <article class="card">
+        <h3 class="card-title">
+          <a href={url('/about')}>About</a>
+        </h3>
+        <p class="card-desc">The human behind the build.</p>
+      </article>
+      <article class="card">
+        <h3 class="card-title">
+          <a href={url('/projects')}>Projects</a>
+        </h3>
+        <p class="card-desc">What's been shipped.</p>
+      </article>
+      <article class="card">
+        <h3 class="card-title">
+          <a href={url('/writing')}>Writing</a>
+        </h3>
+        <p class="card-desc">Field notes from the build.</p>
+      </article>
+    </div>
+  </Section>
+
+  <Section paddingY="sm" as="div">
+    <AgentCredits
+      label="Built with"
+      agents={[
+        { name: 'Technical Architect', role: 'Architecture' },
+        { name: 'Creative Director',   role: 'Design' },
+        { name: 'Coding Agent',        role: 'Implementation' },
+      ]}
+    />
+  </Section>
+</BaseLayout>
+
+<style>
+  .hero-text {
+    max-width: 640px;
+  }
+
+  .hero-heading {
+    font-size: var(--token-text-4xl);
+    font-weight: var(--token-font-bold);
+    letter-spacing: var(--token-tracking-tight);
+    line-height: var(--token-leading-4xl);
+    color: var(--token-color-fg);
+  }
+
+  .hero-sub {
+    font-size: var(--token-text-lg);
+    color: var(--token-color-muted-text);
+    line-height: var(--token-leading-lg);
+    margin-top: var(--token-space-4);
+  }
+
+  .hero-cta {
+    margin-top: var(--token-space-8);
+  }
+
+  .section-heading {
+    font-size: var(--token-text-3xl);
+    font-weight: var(--token-font-semibold);
+    letter-spacing: var(--token-tracking-tight);
+    line-height: var(--token-leading-3xl);
+    color: var(--token-color-fg);
+  }
+
+  .section-body {
+    font-size: var(--token-text-base);
+    line-height: var(--token-leading-base);
+    margin-top: var(--token-space-4);
+    color: var(--token-color-fg);
+  }
+
+  .section-muted {
+    color: var(--token-color-muted-text);
+  }
+
+  .agent-row {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--token-space-3);
+    margin-top: var(--token-space-6);
+  }
+
+  .agent-pill {
+    display: inline-flex;
+    align-items: center;
+    font-size: var(--token-text-sm);
+    background: var(--token-color-muted-bg);
+    color: var(--token-color-muted-text);
+    border-radius: var(--token-radius-full);
+    padding: var(--token-space-1) var(--token-space-3);
+  }
+
+  .section-cta {
+    margin-top: var(--token-space-6);
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: var(--token-space-4);
+  }
+
+  .card {
+    background: var(--token-color-surface);
+    border: 1px solid var(--token-color-border);
+    border-radius: var(--token-radius-lg);
+    padding: var(--token-space-5);
+  }
+
+  .card-title {
+    font-size: var(--token-text-xl);
+    font-weight: var(--token-font-semibold);
+    line-height: var(--token-leading-xl);
+  }
+
+  .card-title a {
+    color: var(--token-color-fg);
+    text-decoration: none;
+  }
+
+  .card-title a:hover {
+    color: var(--token-color-accent);
+  }
+
+  .card-title a:focus-visible {
+    outline: 2px solid var(--token-color-focus-ring);
+    outline-offset: 2px;
+    border-radius: var(--token-radius-sm);
+  }
+
+  .card-desc {
+    font-size: var(--token-text-sm);
+    color: var(--token-color-muted-text);
+    margin-top: var(--token-space-2);
+    line-height: var(--token-leading-sm);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .card-title a {
+      transition: color var(--token-duration-fast) var(--token-ease-standard);
+    }
+  }
+</style>

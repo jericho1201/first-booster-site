@@ -1,0 +1,70 @@
+:root {
+  --token-color-bg:           #FAFAFA;
+  --token-color-surface:      #FFFFFF;
+  --token-color-fg:           #111111;
+  --token-color-accent:       #5B4FE8;
+  --token-color-accent-hover: #4740D4;
+  --token-color-muted-text:   #6B7280;
+  --token-color-muted-bg:     #F3F4F6;
+  --token-color-border:       #E5E7EB;
+  --token-color-danger:       #EF4444;
+  --token-color-success:      #22C55E;
+  --token-color-focus-ring:   rgba(91, 79, 232, 0.6);
+
+  --token-font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  --token-font-regular: 400;
+  --token-font-medium: 500;
+  --token-font-semibold: 600;
+  --token-font-bold: 700;
+
+  --token-text-xs:   0.75rem;
+  --token-text-sm:   0.875rem;
+  --token-text-base: 1rem;
+  --token-text-lg:   1.125rem;
+  --token-text-xl:   1.25rem;
+  --token-text-2xl:  1.5rem;
+  --token-text-3xl:  2rem;
+  --token-text-4xl:  3rem;
+
+  --token-leading-xs:   1.5;
+  --token-leading-sm:   1.5;
+  --token-leading-base: 1.625;
+  --token-leading-lg:   1.5;
+  --token-leading-xl:   1.4;
+  --token-leading-2xl:  1.35;
+  --token-leading-3xl:  1.25;
+  --token-leading-4xl:  1.1;
+
+  --token-tracking-tight:  -0.02em;
+  --token-tracking-normal:  0em;
+  --token-tracking-wide:    0.05em;
+  --token-tracking-wider:   0.08em;
+
+  --token-space-1:    0.25rem;
+  --token-space-1-5:  0.375rem;
+  --token-space-2:    0.5rem;
+  --token-space-2-5:  0.625rem;
+  --token-space-3:    0.75rem;
+  --token-space-4:    1rem;
+  --token-space-5:    1.25rem;
+  --token-space-6:    1.5rem;
+  --token-space-8:    2rem;
+  --token-space-10:   2.5rem;
+  --token-space-12:   3rem;
+  --token-space-14:   3.5rem;
+  --token-space-16:   4rem;
+  --token-space-20:   5rem;
+
+  --token-radius-sm:   4px;
+  --token-radius-md:   8px;
+  --token-radius-lg:   12px;
+  --token-radius-full: 9999px;
+
+  --token-shadow-0: none;
+  --token-shadow-1: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  --token-shadow-2: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.05);
+
+  --token-duration-fast:   120ms;
+  --token-duration-normal: 220ms;
+  --token-ease-standard:   cubic-bezier(0.16, 1, 0.3, 1);
+}

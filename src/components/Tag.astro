@@ -1,0 +1,38 @@
+---
+interface Props {
+  label: string;
+  variant?: 'default' | 'success' | 'muted';
+}
+
+const { label, variant = 'default' } = Astro.props;
+---
+
+<span class={`tag tag-${variant}`}>{label}</span>
+
+<style>
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    font-size: var(--token-text-xs);
+    font-weight: var(--token-font-medium);
+    padding: var(--token-space-1) var(--token-space-2);
+    border-radius: var(--token-radius-full);
+    white-space: nowrap;
+  }
+
+  .tag-default {
+    background: var(--token-color-muted-bg);
+    color: var(--token-color-fg);
+  }
+
+  .tag-success {
+    background: rgba(34, 197, 94, 0.12);
+    color: var(--token-color-success);
+    font-weight: var(--token-font-semibold);
+  }
+
+  .tag-muted {
+    background: var(--token-color-muted-bg);
+    color: var(--token-color-muted-text);
+  }
+</style>

@@ -1,0 +1,63 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+}
+
+const { title, description, image } = Astro.props;
+const currentPath = Astro.url.pathname;
+---
+
+<html lang="en">
+  <head>
+    <BaseHead title={title} description={description} image={image} />
+  </head>
+  <body>
+    <a
+      href="#main-content"
+      class="skip-link"
+    >
+      Skip to main content
+    </a>
+    <Nav currentPath={currentPath} />
+    <main id="main-content" style="flex: 1;">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .skip-link:focus {
+    position: fixed;
+    top: var(--token-space-2);
+    left: var(--token-space-2);
+    z-index: 9999;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    background: var(--token-color-accent);
+    color: #ffffff;
+    padding: var(--token-space-2) var(--token-space-4);
+    border-radius: var(--token-radius-md);
+    font-size: var(--token-text-sm);
+    font-weight: var(--token-font-semibold);
+    text-decoration: none;
+    outline: 2px solid var(--token-color-focus-ring);
+    outline-offset: 2px;
+  }
+</style>

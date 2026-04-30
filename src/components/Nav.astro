@@ -1,0 +1,173 @@
+---
+import { url } from '../utils/url';
+
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+
+const links = [
+  { label: 'About',    href: url('/about') },
+  { label: 'Projects', href: url('/projects') },
+  { label: 'Writing',  href: url('/writing') },
+  { label: 'Contact',  href: url('/contact') },
+];
+---
+
+<header class="nav-header">
+  <nav aria-label="Main navigation" class="nav-inner">
+    <a href={url('/')} class="wordmark" aria-label="Jericho — home">Jericho</a>
+
+    <ul class="nav-links" id="nav-links" role="list">
+      {links.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class="nav-link"
+            aria-current={currentPath === link.href ? 'page' : undefined}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <button
+      class="hamburger"
+      id="hamburger"
+      aria-label="Open navigation menu"
+      aria-expanded="false"
+      aria-controls="nav-links"
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect x="3" y="6"  width="18" height="2" rx="1" fill="currentColor" />
+        <rect x="3" y="11" width="18" height="2" rx="1" fill="currentColor" />
+        <rect x="3" y="16" width="18" height="2" rx="1" fill="currentColor" />
+      </svg>
+    </button>
+  </nav>
+</header>
+
+<style>
+  .nav-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.9);
+    border-bottom: 1px solid var(--token-color-border);
+  }
+
+  .nav-inner {
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 0 var(--token-space-4);
+    height: var(--token-space-14);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .wordmark {
+    font-size: var(--token-text-lg);
+    font-weight: var(--token-font-bold);
+    color: var(--token-color-fg);
+    text-decoration: none;
+  }
+
+  .wordmark:focus-visible {
+    outline: 2px solid var(--token-color-focus-ring);
+    outline-offset: 2px;
+    border-radius: var(--token-radius-sm);
+  }
+
+  .nav-links {
+    display: none;
+    list-style: none;
+    gap: var(--token-space-6);
+    align-items: center;
+  }
+
+  .nav-link {
+    font-size: var(--token-text-sm);
+    font-weight: var(--token-font-medium);
+    color: var(--token-color-muted-text);
+    text-decoration: none;
+  }
+
+  .nav-link:hover {
+    color: var(--token-color-fg);
+  }
+
+  .nav-link[aria-current="page"] {
+    color: var(--token-color-accent);
+    font-weight: var(--token-font-semibold);
+  }
+
+  .nav-link:focus-visible {
+    outline: 2px solid var(--token-color-focus-ring);
+    outline-offset: 2px;
+    border-radius: var(--token-radius-sm);
+  }
+
+  .hamburger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--token-color-fg);
+    padding: var(--token-space-1);
+    border-radius: var(--token-radius-sm);
+  }
+
+  .hamburger:focus-visible {
+    outline: 2px solid var(--token-color-focus-ring);
+    outline-offset: 2px;
+  }
+
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: var(--token-space-14);
+    left: 0;
+    right: 0;
+    background: var(--token-color-surface);
+    border-bottom: 1px solid var(--token-color-border);
+    padding: var(--token-space-4);
+    gap: var(--token-space-4);
+  }
+
+  @media (min-width: 640px) {
+    .nav-links {
+      display: flex;
+    }
+
+    .hamburger {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .nav-link {
+      transition: color var(--token-duration-fast) var(--token-ease-standard);
+    }
+  }
+</style>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+
+  hamburger?.addEventListener('click', () => {
+    const isOpen = navLinks?.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+    hamburger.setAttribute(
+      'aria-label',
+      isOpen ? 'Close navigation menu' : 'Open navigation menu'
+    );
+  });
+</script>
