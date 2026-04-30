@@ -1,0 +1,110 @@
+---
+interface Props {
+  label: string;
+  variant?: 'primary' | 'secondary' | 'ghost';
+  href?: string;
+  type?: string;
+  disabled?: boolean;
+  ariaLabel?: string;
+}
+
+const {
+  label,
+  variant = 'primary',
+  href,
+  type = 'button',
+  disabled = false,
+  ariaLabel,
+} = Astro.props;
+---
+
+{href ? (
+  <a
+    href={href}
+    role="button"
+    class={`btn btn-${variant}`}
+    aria-label={ariaLabel}
+    aria-disabled={disabled ? 'true' : undefined}
+  >
+    {label}
+  </a>
+) : (
+  <button
+    type={type as 'button' | 'submit' | 'reset'}
+    class={`btn btn-${variant}`}
+    aria-label={ariaLabel}
+    disabled={disabled}
+  >
+    {label}
+  </button>
+)}
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--token-text-sm);
+    font-weight: var(--token-font-semibold);
+    padding: var(--token-space-2) var(--token-space-4);
+    border-radius: var(--token-radius-md);
+    border: 2px solid transparent;
+    text-decoration: none;
+    cursor: pointer;
+    white-space: nowrap;
+    font-family: inherit;
+  }
+
+  .btn:focus-visible {
+    outline: 2px solid var(--token-color-focus-ring);
+    outline-offset: 2px;
+  }
+
+  .btn:disabled,
+  .btn[aria-disabled="true"] {
+    opacity: 0.45;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .btn-primary {
+    background: var(--token-color-accent);
+    color: #ffffff;
+    border-color: var(--token-color-accent);
+  }
+
+  .btn-primary:hover:not(:disabled):not([aria-disabled="true"]) {
+    background: var(--token-color-accent-hover);
+    border-color: var(--token-color-accent-hover);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--token-color-accent);
+    border-color: var(--token-color-accent);
+  }
+
+  .btn-secondary:hover:not(:disabled):not([aria-disabled="true"]) {
+    background: var(--token-color-accent);
+    color: #ffffff;
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--token-color-fg);
+    border-color: transparent;
+  }
+
+  .btn-ghost:hover:not(:disabled):not([aria-disabled="true"]) {
+    background: var(--token-color-muted-bg);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .btn {
+      transition:
+        background var(--token-duration-fast) var(--token-ease-standard),
+        color var(--token-duration-fast) var(--token-ease-standard),
+        border-color var(--token-duration-fast) var(--token-ease-standard);
+    }
+  }
+</style>

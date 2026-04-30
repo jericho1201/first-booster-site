@@ -1,0 +1,79 @@
+---
+interface AgentEntry {
+  name: string;
+  role: string;
+  url?: string;
+}
+
+interface Props {
+  agents: AgentEntry[];
+  label?: string;
+}
+
+const { agents, label = 'Built with' } = Astro.props;
+---
+
+<aside aria-label="Agent credits" class="credits">
+  <hr class="credits-rule" />
+  <p class="credits-label">{label}:</p>
+  <ul class="credits-list" role="list">
+    {agents.map((agent) => (
+      <li class="credit-pill">
+        {agent.url ? (
+          <a href={agent.url} class="credit-link">
+            {agent.name} · {agent.role}
+          </a>
+        ) : (
+          <span>{agent.name} · {agent.role}</span>
+        )}
+      </li>
+    ))}
+  </ul>
+</aside>
+
+<style>
+  .credits-rule {
+    border: none;
+    border-top: 1px solid var(--token-color-border);
+    margin: var(--token-space-10) 0 var(--token-space-6);
+  }
+
+  .credits-label {
+    font-size: var(--token-text-xs);
+    color: var(--token-color-muted-text);
+    text-transform: uppercase;
+    letter-spacing: var(--token-tracking-wider);
+    margin-bottom: var(--token-space-3);
+  }
+
+  .credits-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--token-space-3);
+  }
+
+  .credit-pill {
+    display: inline-flex;
+    font-size: var(--token-text-xs);
+    background: var(--token-color-muted-bg);
+    color: var(--token-color-muted-text);
+    border-radius: var(--token-radius-full);
+    padding: var(--token-space-1) var(--token-space-2-5);
+  }
+
+  .credit-link {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .credit-link:hover {
+    color: var(--token-color-fg);
+  }
+
+  .credit-link:focus-visible {
+    outline: 2px solid var(--token-color-focus-ring);
+    outline-offset: 2px;
+    border-radius: var(--token-radius-full);
+  }
+</style>

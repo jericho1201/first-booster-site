@@ -1,0 +1,86 @@
+---
+interface Props {
+  links?: Array<{ label: string; url: string }>;
+}
+
+const { links = [] } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer role="contentinfo" class="footer">
+  <div class="footer-inner">
+    <p class="copyright">© {year} Jericho</p>
+
+    {links.length > 0 && (
+      <nav aria-label="Footer navigation" class="footer-links">
+        <ul role="list">
+          {links.map((link) => (
+            <li>
+              <a href={link.url} class="footer-link">{link.label}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    )}
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--token-color-surface);
+    border-top: 1px solid var(--token-color-border);
+    padding: var(--token-space-6) 0;
+  }
+
+  .footer-inner {
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 0 var(--token-space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--token-space-3);
+    align-items: flex-start;
+  }
+
+  .copyright {
+    font-size: var(--token-text-sm);
+    color: var(--token-color-muted-text);
+  }
+
+  .footer-links ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--token-space-4);
+  }
+
+  .footer-link {
+    font-size: var(--token-text-sm);
+    color: var(--token-color-muted-text);
+    text-decoration: none;
+  }
+
+  .footer-link:hover {
+    color: var(--token-color-fg);
+  }
+
+  .footer-link:focus-visible {
+    outline: 2px solid var(--token-color-focus-ring);
+    outline-offset: 2px;
+    border-radius: var(--token-radius-sm);
+  }
+
+  @media (min-width: 640px) {
+    .footer-inner {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .footer-link {
+      transition: color var(--token-duration-fast) var(--token-ease-standard);
+    }
+  }
+</style>
